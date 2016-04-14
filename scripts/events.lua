@@ -3,14 +3,8 @@ local events = {}
 local scripts_init = nil
 local scripts_onload = nil
 
-local function setup()
-  if not events then events = {} end
-  if not scripts then scripts = {} end
-end
 
 function module.on_event(event_name, hook)
-  setup()
-
   if not events[event_name] then
     events[event_name] = {}
     script.on_event(event_name, function(event)
