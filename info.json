@@ -1,0 +1,9 @@
+{
+	"name": "TacoLand",
+	"author": "NetArc",
+	"version": "0.1.0",
+	"title": "Taco Land",
+	"homepage": "http://www.comingsoon.com",
+	"description": "Collection of badass stuff",
+  "dependencies": []
+}
