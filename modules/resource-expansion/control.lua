@@ -1,6 +1,6 @@
 require "defines"
 local config = require("config")
-local events = require("scripts.events")
+local events = require("util.events")
 
 -- TODO: we really need to make this smarter by tracking existing fields and comparing
 -- distance to similiar field types instead of just distance from start pos (0,0)

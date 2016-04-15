@@ -1,21 +1,13 @@
 require "defines"
-local events = require("scripts.events")
-local tlWorldLoot
+local events = require("util.events")
 
 local function setup_initial_loot()
-	global.tacoland.WorldLoot.Caches = {
-		basic = {
-			container = "basic-cache",
-			loot = {}
-		},
-		rare = {
-			container = "rare-cache",
-			loot = {}
-		}
-	}
+	if #global.tacoland.WorldLoot.Caches.basic.loot ~= 0 then
+		return
+	end
 
 	for name, prototype in pairs(game.item_prototypes) do
-		if prototype.group.name == "intermediate-products" and
+		if prototype.group.name == "intermediate-products" then
 			table.insert(global.tacoland.WorldLoot.Caches.basic.loot, name)
 		end
 
@@ -25,23 +17,10 @@ local function setup_initial_loot()
 	end
 end
 
-local function setup_globals()
-  if not global.tacoland.WorldLoot then
-		global.tacoland.WorldLoot = {
-			Caches = {}
-		}
-
-		setup_initial_loot()
-	end
-
-	tlWorldLoot = global.tacoland.WorldLoot
-end
-
-
 function get_random_cache()
 	local CacheTypes = {}
 
-	for name,_ in pairs(tlWorldLoot.Caches) do
+	for name,_ in pairs(global.tacoland.WorldLoot.Caches) do
 		table.insert(CacheTypes, name)
 	end
 
@@ -49,7 +28,7 @@ function get_random_cache()
 		return nil
 	end
 
-	return tlWorldLoot.Caches[CacheTypes[math.random(#CacheTypes)]]
+	return global.tacoland.WorldLoot.Caches[CacheTypes[math.random(#CacheTypes)]]
 end
 
 function spawn_cache(event, area)
@@ -82,11 +61,11 @@ function spawn_cache(event, area)
 end
 
 events.on_init(function()
-  setup_globals()
+  setup_initial_loot()
 end)
 
 events.on_load(function()
-  setup_globals()
+  setup_initial_loot()
 end)
 
 -- Chunks are 32x32

@@ -1,5 +1,5 @@
 require "defines"
-local events = require("scripts.events")
+local events = require("util.events")
 
 local ResearchNode = "quantum-vein"
 
