@@ -1,0 +1,7 @@
+return {
+  tacoland = {
+    research = {
+      veins = {}
+    }
+  }
+}
