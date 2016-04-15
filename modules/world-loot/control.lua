@@ -17,7 +17,7 @@ local function setup_initial_loot()
 	end
 end
 
-function get_random_cache()
+local function get_random_cache()
 	local CacheTypes = {}
 
 	for name,_ in pairs(global.tacoland.WorldLoot.Caches) do

@@ -25,11 +25,11 @@ data:extend({
       },
     },
     unit = {
-      count = 10,
+      count = 1,
       ingredients = {
         {"quantum-crystal", 1}
       },
-      time = 1
+      time = 10
     },
     order = "l-4",
   },
@@ -53,11 +53,11 @@ data:extend({
     },
     prerequisites = {"logistics"},
     unit = {
-      count = 100,
+      count = 2,
       ingredients = {
         {"quantum-crystal", 1}
       },
-      time = 1
+      time = 10
     },
     order = "l-4",
   },
@@ -81,11 +81,11 @@ data:extend({
     },
     prerequisites = {"logistics-4"},
     unit = {
-      count = 200,
+      count = 5,
       ingredients = {
         {"quantum-crystal", 1}
       },
-      time = 1
+      time = 10
     },
     order = "l-5",
   },
