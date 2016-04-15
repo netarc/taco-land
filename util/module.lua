@@ -3,30 +3,30 @@ local file_globals = '.globals'
 local file_main = '.control'
 local file_data = '.data'
 
-local function tdefault(a, b)
-  local result = false
+local function table_default(target, other)
+  local changed = false
 
-  if type(a) == 'table' and type(b) == 'table' then
-    for k, v in pairs(b) do
-      if type(a[k]) == 'nil' then
-        a[k] = v
-        result = true
-      elseif type(v) == 'table' and type(a[k]) == 'table' then
-        if merge(a[k], v) then
-          result = true
+  if type(target) == 'table' and type(other) == 'table' then
+    for k, v in pairs(other) do
+      if type(target[k]) == 'nil' then
+        target[k] = v
+        changed = true
+      elseif type(v) == 'table' and type(target[k]) == 'table' then
+        if table_default(target[k], v) then
+          changed = true
         end
       end
     end
   end
 
-  return result
+  return changed
 end
 
 function module.load(name)
   local status, err = pcall(function()
     local module_defaults = require(name .. '.globals')
     if type(module_defaults) == 'table' then
-      tdefault(global, module_defaults)
+      table_default(global, module_defaults)
     end
   end)
 
