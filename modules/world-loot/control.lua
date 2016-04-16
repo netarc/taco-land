@@ -15,6 +15,34 @@ local function setup_initial_loot()
 			table.insert(global.tacoland.WorldLoot.Caches.rare.loot, name)
 		end
 	end
+
+
+	buildLootTable()
+end
+
+
+function buildLootTable()
+	for Name,Tech in pairs(game.forces.player.technologies) do
+		if game.forces.player.technologies[Name].effects then
+			for i,Recipe in pairs(game.forces.player.technologies[Name].effects) do
+				if Recipe.recipe then
+					table.insert(global.tacoland.lootTable[getResearchLevel(Name)], Recipe.recipe)
+				end
+			end
+		end
+	end
+end
+
+function getResearchLevel(technology)
+    local levels = {["science-pack-1"] = 1, ["science-pack-2"] = 2, ["science-pack-3"] = 3, ["alien-science-pack"] = 4}
+    local level = 0
+	local Tech = game.forces.player.technologies[technology]
+    for _,t in pairs(Tech.research_unit_ingredients) do
+        if levels[t.name] and levels[t.name] > level then
+            level = levels[t.name]
+		end
+    end
+    return level
 end
 
 local function get_random_cache()
@@ -52,13 +80,16 @@ function spawn_cache(event, area)
 		local container = game.get_surface("nauvis").create_entity({name=cache.container, position=pos, force=game.forces.neutral})
 
 		for i = 1, (math.random(cfg_min_items, cfg_max_items)) do
-			local item = cache.loot[math.random(#cache.loot)]
+			local item = global.tacoland.lootTable[1][math.random(#global.tacoland.lootTable[1])]
 			local amount = math.random(cfg_max_stack_size)
 
 			container.insert{name=item, count=amount}
 		end
 	end
 end
+
+
+
 
 events.on_init(function()
   setup_initial_loot()

@@ -11,6 +11,13 @@ return {
     			loot = {}
     		}
       }
+    },
+    -- 4 levels of loot, populated in the init script
+    lootTable = {
+      {},
+      {},
+      {},
+      {}
     }
   }
 }
