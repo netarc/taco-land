@@ -1,4 +1,10 @@
 return {
+  modules = {
+    -- 'ores',
+    'research-station',
+    -- 'resource-expansion',
+    -- 'world-loot'
+  },
   resource = {
     expansion = {
       -- The ratio per chunk away from start position

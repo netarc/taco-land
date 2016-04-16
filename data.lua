@@ -94,7 +94,4 @@ local module = require("util.module")
 -- })
 --
 
-module.data("modules.ores")
-module.data("modules.research-station")
-module.data("modules.resource-expansion")
-module.data("modules.world-loot")
+module.init_data()

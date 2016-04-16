@@ -7,10 +7,10 @@ local config = require("config")
 local cfg_entity_name = "quantum-vein"
 
 
-function spawn_quantum_vein(event, area)
+function spawn_quantum_vein(pos, area)
 	local position = {
-		event.area.left_top.x + math.random(area),
-		event.area.left_top.y + math.random(area)
+		pos.x + math.random(area) - math.random(area * 2),
+		pos.y + math.random(area) - math.random(area * 2)
 	}
 	local surface = game.get_surface("nauvis")
 
@@ -22,12 +22,18 @@ function spawn_quantum_vein(event, area)
     })
 
 		table.insert(global.tacoland.research.veins, entity)
+		return entity
 	end
+
+	return nil
 end
 
 -- Chunks are 32x32
 events.on_event(defines.events.on_chunk_generated, function(event)
-	if math.random(100) <= 10 then
+	if #global.tacoland.research.veins == 0 then
+		while not spawn_quantum_vein({x=0,y=0}, 128) do
+		end
+	elseif math.random(100) <= 10 then
 		-- abort if we are within X distance of another vein
 		for _,vein in pairs(global.tacoland.research.veins) do
 			if util.distance(event.area.left_top, vein.position) < config.research_station.frequency then
@@ -35,7 +41,7 @@ events.on_event(defines.events.on_chunk_generated, function(event)
 			end
 		end
 
-		spawn_quantum_vein(event, 32)
+		spawn_quantum_vein(event.area.left_top, 32)
 	end
 end)
 

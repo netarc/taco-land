@@ -1,7 +1,10 @@
 local module = {}
+local config = require('config')
+local path_modules = 'modules.'
 local file_globals = '.globals'
 local file_main = '.control'
 local file_data = '.data'
+local file_data_updates = '.data-updates'
 
 local function table_default(target, other)
   local changed = false
@@ -44,6 +47,34 @@ function module.data(name)
 
   if not status and not string.find(err, file_data .. ' not found') then
     assert(false, err)
+  end
+end
+
+function module.data_updates(name)
+  local status, err = pcall(function()
+    require(name .. file_data_updates)
+  end)
+
+  if not status and not string.find(err, file_data_updates .. ' not found') then
+    assert(false, err)
+  end
+end
+
+function module.init_load()
+  for _,mod in pairs(config.modules) do
+    module.load(path_modules .. mod)
+  end
+end
+
+function module.init_data()
+  for _,mod in pairs(config.modules) do
+    module.data(path_modules .. mod)
+  end
+end
+
+function module.init_data_updates()
+  for _,mod in pairs(config.modules) do
+    module.data_updates(path_modules .. mod)
   end
 end
 
