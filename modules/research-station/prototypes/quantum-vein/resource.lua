@@ -2,7 +2,7 @@ data:extend({
   {
     type = "resource",
     name = "quantum-vein",
-    icon = "__TacoLand__/modules/research/graphics/icons/quantum-vein.png",
+    icon = "__TacoLand__/modules/research-station/graphics/icons/quantum-vein.png",
     flags = {"placeable-neutral"},
     category = "quantum-research",
     order="a-b-b",
@@ -19,7 +19,7 @@ data:extend({
     {
       sheet =
       {
-        filename = "__TacoLand__/modules/research/graphics/entity/quantum-vein.png",
+        filename = "__TacoLand__/modules/research-station/graphics/entity/quantum-vein.png",
         priority = "extra-high",
         width = 75,
         height = 61,

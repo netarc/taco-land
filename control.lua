@@ -7,6 +7,6 @@ local module = require("util.module")
 -- math.random(); math.random(); math.random()
 
 module.load("modules.ores")
-module.load("modules.research")
+module.load("modules.research-station")
 module.load("modules.resource-expansion")
 module.load("modules.world-loot")

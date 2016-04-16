@@ -5,7 +5,10 @@ return {
       density_distance_ratio = 0.02 -- every 50 chunks(1600 squares) double ore density
     }
   },
-  research = {
-    speed = 1 -- 10 seconds = 1 / (10secs * 60ticks)
+  research_station = {
+    -- how many units until we will likely encounter a research station again
+    frequency = 500,
+    -- research modifier speed
+    speed = 3
   }
 }

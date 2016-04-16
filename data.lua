@@ -1,12 +1,100 @@
 local module = require("util.module")
 
 -- RESET All?
-data.raw.technology = {}
+-- data.raw.technology = {}
 -- data.raw.recipe = {}
 -- data.raw.item = {}
 -- data.raw["rocket-silo"] = {}
 
+-- EXPERIMENTAL
+-- data:extend({
+--   {
+--     type = "technology",
+--     name = "logistics",
+--     icon = "__base__/graphics/technology/logistics.png",
+--     effects = {
+--       {
+--         type = "unlock-recipe",
+--         recipe = "basic-transport-belt"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "basic-transport-belt-to-ground"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "basic-splitter"
+--       },
+--     },
+--     unit = {
+--       count = 1,
+--       ingredients = {
+--         {"quantum-crystal", 1}
+--       },
+--       time = 10
+--     },
+--     order = "l-4",
+--   },
+--   {
+--     type = "technology",
+--     name = "logistics-4",
+--     icon = "__base__/graphics/technology/logistics.png",
+--     effects = {
+--       {
+--         type = "unlock-recipe",
+--         recipe = "basic-transport-belt"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "basic-transport-belt-to-ground"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "basic-splitter"
+--       },
+--     },
+--     prerequisites = {"logistics"},
+--     unit = {
+--       count = 2,
+--       ingredients = {
+--         {"quantum-crystal", 1}
+--       },
+--       time = 10
+--     },
+--     order = "l-4",
+--   },
+--   {
+--     type = "technology",
+--     name = "logistics-5",
+--     icon = "__base__/graphics/technology/logistics.png",
+--     effects = {
+--       {
+--         type = "unlock-recipe",
+--         recipe = "basic-transport-belt"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "basic-transport-belt-to-ground"
+--       },
+--       {
+--         type = "unlock-recipe",
+--         recipe = "basic-splitter"
+--       },
+--     },
+--     prerequisites = {"logistics-4"},
+--     unit = {
+--       count = 5,
+--       ingredients = {
+--         {"quantum-crystal", 1}
+--       },
+--       time = 10
+--     },
+--     order = "l-5",
+--   },
+-- })
+--
+
 module.data("modules.ores")
-module.data("modules.research")
+module.data("modules.research-station")
 module.data("modules.resource-expansion")
 module.data("modules.world-loot")
