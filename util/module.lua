@@ -33,7 +33,7 @@ function module.load(name)
     end
   end)
 
-  if not status and not string.find(err, file_globals .. ' not found') then
+  if not status and not string.find(err, file_globals .. ' not found', 1, true) then
     assert(false, err)
   end
 
@@ -45,17 +45,18 @@ function module.data(name)
     require(name .. file_data)
   end)
 
-  if not status and not string.find(err, file_data .. ' not found') then
+  if not status and not string.find(err, file_data .. ' not found', 1, true) then
     assert(false, err)
   end
 end
 
 function module.data_updates(name)
+  local status = true
   local status, err = pcall(function()
     require(name .. file_data_updates)
   end)
 
-  if not status and not string.find(err, file_data_updates .. ' not found') then
+  if not status and not string.find(err, file_data_updates .. ' not found', 1, true) then
     assert(false, err)
   end
 end

@@ -1,12 +1,19 @@
 local module = {}
+local logger = require('util.logger')
 
 function module.remove(name)
   data.raw.recipe[name] = nil
 end
 
-function module.add(name, recipe)
-  module.remove(name)
-  data.raw.recipe[name] = recipe
+function module.add(recipe)
+  module.remove(recipe.name)
+  data.raw.recipe[recipe.name] = recipe
+end
+
+function module.disable(name)
+  if data.raw.recipe[name] then
+    data.raw.recipe[name].enabled = false
+  end
 end
 
 -- function module.remove_item(name, item)

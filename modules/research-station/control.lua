@@ -29,7 +29,7 @@ function spawn_quantum_vein(pos, area)
 end
 
 -- Chunks are 32x32
-events.on_event(defines.events.on_chunk_generated, function(event)
+events.on(defines.events.on_chunk_generated, function(event)
 	if #global.tacoland.research.veins == 0 then
 		while not spawn_quantum_vein({x=0,y=0}, 128) do
 		end
@@ -45,17 +45,26 @@ events.on_event(defines.events.on_chunk_generated, function(event)
 	end
 end)
 
-events.on_event(defines.events.on_tick, function(event)
-	if not game.player.force.current_research then
+events.on(defines.events.on_tick, function(event)
+	local technology = game.forces.player.current_research
+	local progress = game.forces.player.research_progress
+	local station_count = game.forces.player.get_entity_count("research-station")
+	local crystal_count = 1
+
+	if not technology then
 		return
 	end
 
-	local technology = game.player.force.current_research
-	local delta = (1 / technology.research_unit_energy) / technology.research_unit_count
-	local station_count = game.player.force.get_entity_count("research-station")
+	for _,ingredient in ipairs(technology.research_unit_ingredients) do
+		if ingredient.name == 'quantum-crystal' then
+			crystal_count = ingredient.amount
+		end
+	end
+
+	local delta = 1 / (technology.research_unit_energy * crystal_count * technology.research_unit_count)
 	-- TODO: We really should check to see if our stations are 100% powered
-	local progress = game.player.force.research_progress + (station_count * delta * config.research_station.speed)
+	progress = progress + (delta * config.research_station.speed) * station_count
 
 	if progress > 1 then progress = 1 end
-	game.player.force.research_progress = progress
+	game.forces.player.research_progress = progress
 end)

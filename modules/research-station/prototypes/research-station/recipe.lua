@@ -1,7 +1,7 @@
 local recipe = require("util.data-recipe")
 
 recipe.remove("lab")
-recipe.add("research-station", {
+recipe.add({
   type = "recipe",
   name = "research-station",
   energy_required = 20,
