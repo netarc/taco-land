@@ -1,7 +1,7 @@
 return {
   tacoland = {
-    WorldLoot = {
-      Caches = {
+    world_loot = {
+      caches = {
         basic = {
     			container = "basic-cache",
     			loot = {}
@@ -9,15 +9,16 @@ return {
     		rare = {
     			container = "rare-cache",
     			loot = {}
+    		},
+    		epic = {
+    			container = "epic-cache",
+    			loot = {}
+    		},
+    		legendary = {
+    			container = "legendary-cache",
+    			loot = {}
     		}
       }
-    },
-    -- 4 levels of loot, populated in the init script
-    lootTable = {
-      {},
-      {},
-      {},
-      {}
     }
   }
 }

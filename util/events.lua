@@ -4,7 +4,7 @@ local scripts_init = nil
 local scripts_onload = nil
 
 
-function module.on_event(event_name, hook)
+function module.on(event_name, hook)
   if not events[event_name] then
     events[event_name] = {}
     script.on_event(event_name, function(event)
