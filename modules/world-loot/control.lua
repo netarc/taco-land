@@ -2,40 +2,9 @@ require "defines"
 local events = require("util.events")
 local logger = require("util.logger")
 
-local function get_research_level(tech)
-	local levels = {
-		["science-pack-1"] = "basic",
-		["science-pack-2"] = "rare",
-		["science-pack-3"] = "epic",
-		["alien-science-pack"] = "legendary"
-	}
-	local level = "basic"
-	local technology = game.forces.player.technologies[tech]
 
-	for _, t in pairs(technology.research_unit_ingredients) do
-	  if levels[t.name] and levels[t.name] > level then
-      level = levels[t.name]
-		end
-	end
 
-	return level
-end
 
-local function build_loot_table()
-	if #global.tacoland.world_loot.caches.basic.loot ~= 0 then
-		return
-	end
-
-	for name, technology in pairs(game.forces.player.technologies) do
-		if game.forces.player.technologies[name].effects then
-			for _, effect in pairs(game.forces.player.technologies[name].effects) do
-				if effect.recipe and game.item_prototypes[effect.recipe] then
-					table.insert(global.tacoland.world_loot.caches[get_research_level(name)].loot, effect.recipe)
-				end
-			end
-		end
-	end
-end
 
 local function get_random_cache()
 	local caches = {}
@@ -82,11 +51,11 @@ end
 
 
 events.on_init(function()
-  build_loot_table()
+
 end)
 
 events.on_load(function()
-  build_loot_table()
+
 end)
 
 -- Chunks are 32x32
