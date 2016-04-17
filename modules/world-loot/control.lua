@@ -3,21 +3,22 @@ local events = require("util.events")
 local logger = require("util.logger")
 
 
-
-
-
 local function get_random_cache()
-	local caches = {}
-
-	for name,_ in pairs(global.tacoland.world_loot.caches) do
-		table.insert(caches, name)
+	local roll = math.random(100)
+	
+	-- 3% legendary (1,2,3 on the roll)
+	if (roll <= 3) then
+		return global.tacoland.world_loot.caches["legendary"]
+	-- 8% epic (4-11 on the roll)
+	elseif (roll <= 11 and roll > 3) then
+		return global.tacoland.world_loot.caches["epic"]
+	-- 25% rare (12-37 on the roll)
+	elseif (roll <= 36 and roll > 11) then
+		return global.tacoland.world_loot.caches["rare"]
+	-- 64% basic (36-100 on the roll )
+	elseif ( roll > 36) then
+		return global.tacoland.world_loot.caches["basic"]
 	end
-
-	if #caches == 0 then
-		return nil
-	end
-
-	return global.tacoland.world_loot.caches[caches[math.random(#caches)]]
 end
 
 function spawn_cache(event, area)

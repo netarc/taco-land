@@ -115,8 +115,8 @@ return {
             "solar-panel-equipment",
             "substation",
             "basic-modular-armor",
-            "defender",
-            "distractor"
+            "defender-capsule",
+            "distractor-capsule"
           }
     		},
     		legendary = {
@@ -131,7 +131,7 @@ return {
             "fusion-reactor-equipment",
             "power-armor",
             "power-armor-mk2",
-            "destroyer"
+            "destroyer-capsule"
           }
     		}
       }
@@ -169,9 +169,6 @@ acid-projectile-purple
 basic-grenade
 blue-laser
 cannon-projectile
-defender-capsule
-destroyer-capsule
-distractor-capsule
 explosive-cannon-projectile
 explosive-rocket
 laser

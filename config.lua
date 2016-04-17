@@ -4,7 +4,7 @@ return {
     'research-station',
     'xp',
     -- 'resource-expansion',
-    -- 'world-loot'
+    'world-loot'
   },
   resource = {
     expansion = {
