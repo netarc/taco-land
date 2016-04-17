@@ -67,8 +67,8 @@ end)
 -- Chunks are 32x32
 events.on(defines.events.on_chunk_generated, function(event)
 	local roll = math.random(100)
-	-- 15% to spawn a cache
-	if (roll <= 15 ) then
+	-- 10% to spawn a cache
+	if (roll <= 10 ) then
 		spawn_cache(event, 32)
 	end
 end)
