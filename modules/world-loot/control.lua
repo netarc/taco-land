@@ -22,11 +22,7 @@ local function get_random_cache()
 end
 
 function spawn_cache(event, area)
-	-- these should be configured per "event" of cache spawn
-	local cfg_max_stack_size = 5
-	local cfg_min_items = 2
-	local cfg_max_items = 5
-	--
+
 	local cache = get_random_cache()
 
 	if not cache or #cache.loot == 0 then
@@ -41,44 +37,24 @@ function spawn_cache(event, area)
 	if game.get_surface("nauvis").can_place_entity({name=cache.container, position=pos}) then
 		local container = game.get_surface("nauvis").create_entity({name=cache.container, position=pos, force=game.forces.neutral})
 
-		-- insert items
-		for i = 1, (math.random(cfg_min_items, cfg_max_items)) do
-			local item = cache.loot[math.random(#cache.loot)]
-			local amount = math.random(cfg_max_stack_size)
-
-			container.insert{name=item, count=amount}
-		end
-		
-		-- insert raw raw_resources (1-3 resources up to 100 each)
-		for i = 1, (math.random(3)) do
-			local item = global.tacoland.world_loot.raw_resources[math.random(#global.tacoland.world_loot.raw_resources)]
-			local amount = math.random(100)
-
-			container.insert{name=item, count=amount}
-		end
-		
-		-- insert basic materials (1-3 materials up to 20 each)
-		for i = 1, (math.random(3)) do
-			local item = global.tacoland.world_loot.basic_materials[math.random(#global.tacoland.world_loot.basic_materials)]
-			local amount = math.random(20)
-
-			container.insert{name=item, count=amount}
-		end
-		
-		-- insert advanced materials into high level caches (1-3 materials up to 20 each)
+		insert_loot(container, cache.loot, 5, 5)
+		insert_loot(container, global.tacoland.world_loot.raw_resources, 3, 100)
+		insert_loot(container, global.tacoland.world_loot.basic_materials, 3, 20)
 		if (cache.container ~= "basic-cache") then
-			for i = 1, (math.random(3)) do
-				local item = global.tacoland.world_loot.advanced_materials[math.random(#global.tacoland.world_loot.advanced_materials)]
-				local amount = math.random(20)
-
-				container.insert{name=item, count=amount}
-			end
+			insert_loot(container, global.tacoland.world_loot.advanced_materials, 3, 20)
 		end
-
-		
+    
 	end
 end
 
+function insert_loot(container, loot_table, num_items, max_stack_size)
+	for i = 1, (math.random(num_items)) do
+		local item = loot_table[math.random(#loot_table)]
+		local amount = math.random(max_stack_size)
+
+		container.insert{name=item, count=amount}
+	end
+end
 
 events.on_init(function()
 
