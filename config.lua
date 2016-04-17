@@ -2,6 +2,7 @@ return {
   modules = {
     -- 'ores',
     'research-station',
+    'xp',
     -- 'resource-expansion',
     'world-loot'
   },
