@@ -3,7 +3,7 @@ local events = require("util.events")
 local logger = require("util.logger")
 
 
-local function get_random_cache()
+local function get_random_cache()``
 	local roll = math.random(100)
 	
 	-- 3% legendary (1,2,3 on the roll)
@@ -61,5 +61,9 @@ end)
 
 -- Chunks are 32x32
 events.on(defines.events.on_chunk_generated, function(event)
-	spawn_cache(event, 32)
+	local roll = math.random(100)
+	-- 15% to spawn a cache
+	if (roll <= 15 ) then
+		spawn_cache(event, 32)
+	end
 end)
