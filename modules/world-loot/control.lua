@@ -3,27 +3,27 @@ local events = require("util.events")
 local logger = require("util.logger")
 
 
-local function get_random_cache()``
+local function get_random_cache()
 	local roll = math.random(100)
 	
-	-- 3% legendary (1,2,3 on the roll)
-	if (roll <= 3) then
+	-- 5% legendary (1,2,3 on the roll)
+	if (roll <= 5) then
 		return global.tacoland.world_loot.caches["legendary"]
-	-- 8% epic (4-11 on the roll)
-	elseif (roll <= 11 and roll > 3) then
+	-- 10% epic (5-15 on the roll)
+	elseif (roll <= 15 and roll > 5) then
 		return global.tacoland.world_loot.caches["epic"]
-	-- 25% rare (12-37 on the roll)
-	elseif (roll <= 36 and roll > 11) then
+	-- 25% rare (15-40 on the roll)
+	elseif (roll <= 40 and roll > 15) then
 		return global.tacoland.world_loot.caches["rare"]
-	-- 64% basic (36-100 on the roll )
-	elseif ( roll > 36) then
+	-- 60% basic (40-100 on the roll )
+	elseif ( roll > 40) then
 		return global.tacoland.world_loot.caches["basic"]
 	end
 end
 
 function spawn_cache(event, area)
 	-- these should be configured per "event" of cache spawn
-	local cfg_max_stack_size = 10
+	local cfg_max_stack_size = 5
 	local cfg_min_items = 2
 	local cfg_max_items = 5
 	--
@@ -41,12 +41,41 @@ function spawn_cache(event, area)
 	if game.get_surface("nauvis").can_place_entity({name=cache.container, position=pos}) then
 		local container = game.get_surface("nauvis").create_entity({name=cache.container, position=pos, force=game.forces.neutral})
 
+		-- insert items
 		for i = 1, (math.random(cfg_min_items, cfg_max_items)) do
 			local item = cache.loot[math.random(#cache.loot)]
 			local amount = math.random(cfg_max_stack_size)
 
 			container.insert{name=item, count=amount}
 		end
+		
+		-- insert raw raw_resources (1-3 resources up to 100 each)
+		for i = 1, (math.random(3)) do
+			local item = global.tacoland.world_loot.raw_resources[math.random(#global.tacoland.world_loot.raw_resources)]
+			local amount = math.random(100)
+
+			container.insert{name=item, count=amount}
+		end
+		
+		-- insert basic materials (1-3 materials up to 20 each)
+		for i = 1, (math.random(3)) do
+			local item = global.tacoland.world_loot.basic_materials[math.random(#global.tacoland.world_loot.basic_materials)]
+			local amount = math.random(20)
+
+			container.insert{name=item, count=amount}
+		end
+		
+		-- insert advanced materials into high level caches (1-3 materials up to 20 each)
+		if (cache.container ~= "basic-cache") then
+			for i = 1, (math.random(3)) do
+				local item = global.tacoland.world_loot.advanced_materials[math.random(#global.tacoland.world_loot.advanced_materials)]
+				local amount = math.random(20)
+
+				container.insert{name=item, count=amount}
+			end
+		end
+
+		
 	end
 end
 

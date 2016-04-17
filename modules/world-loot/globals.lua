@@ -1,13 +1,32 @@
 return {
   tacoland = {
     world_loot = {
+      raw_resources = {
+        "coal",
+        "copper-ore",
+        "iron-ore",
+        "stone"
+      },
+      basic_materials = {
+        "iron-plate",
+        "copper-plate",
+        "stone-brick",
+        "steel-plate",
+        "iron-gear-wheel",
+        "copper-cable"
+      },
+      advanced_materials = {
+        "plastic-bar",
+        "battery",
+        "explosives",
+        "sulfur"
+      },
       caches = {
         basic = {
     			container = "basic-cache",
     			loot = {
             "basic-inserter",
             "assembling-machine-1",
-            "arithmetic-combinator",
             "basic-mining-drill",
             "basic-splitter",
             "basic-transport-belt",
@@ -15,16 +34,8 @@ return {
             "boiler",
             "burner-inserter",
             "burner-mining-drill",
-            "coal",
-            "constant-combinator",
-            "copper-cable",
-            "copper-ore",
-            "copper-plate",
             "electronic-circuit",
             "iron-chest",
-            "iron-gear-wheel",
-            "iron-ore",
-            "iron-plate",
             "long-handed-inserter",
             "offshore-pump",
             "pipe",
@@ -36,14 +47,10 @@ return {
             "smart-inserter",
             "steam-engine",
             "steel-chest",
-            "steel-plate",
-            "stone",
-            "stone-brick",
             "stone-furnace",
             "stone-wall",
             "basic-armor",
             "repair-pack"
-          
           }
     		},
     		rare = {
@@ -54,20 +61,17 @@ return {
             "assembling-machine-2",
             "basic-accumulator",
             "basic-beacon",
-            "battery",
             "big-electric-pole",
             "chemical-plant",
             "concrete",
             "crude-oil-barrel",
             "curved-rail",
             "empty-barrel",
-            "explosives",
             "fast-inserter",
             "gate",
             "gun-turret",
             "medium-electric-pole",
             "oil-refinery",
-            "plastic-bar",
             "pumpjack",
             "radar",
             "rail-chain-signal",
@@ -77,9 +81,7 @@ return {
             "steel-furnace",
             "storage-tank",
             "straight-rail",
-            "sulfur",
             "heavy-armor"
-          
           }
     		},
     		epic = {
@@ -188,9 +190,9 @@ poison-capsule
 raw-fish
 slowdown-capsule
 
-
-
 UNUSED ITEMS:
+constant-combinator
+arithmetic-combinator
 coin
 computer
 decider-combinator
